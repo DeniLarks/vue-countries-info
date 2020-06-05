@@ -1,8 +1,10 @@
 <template>
   <div id="app">
-    <div class="countries-count">
-      {{ `Found ${countries.length} countries` }}
-    </div>
+    
+    <Header 
+      v-bind:countriesCount="countries.length"
+    />
+
     <div class="countries-list">
       <Country 
         v-for="country in countries"
@@ -16,9 +18,15 @@
 
 <script>
 import Country from './components/Country'
+import Header from './components/Header'
 
 export default {
   name: 'App',
+
+  components: {
+    Country, Header
+  },
+
   data() {
     return {
       countries: [
@@ -55,10 +63,6 @@ export default {
       .then(response => response.json())
       .then(json => this.countries = json)
   },
-
-  components: {
-    Country
-  }
 }
 </script>
 
@@ -69,9 +73,8 @@ export default {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.countries-count {
-  text-align: right;
-  margin: 20px 0;
+.btn {
+  cursor: pointer;
 }
 
 .countries-list {

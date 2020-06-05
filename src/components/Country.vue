@@ -23,6 +23,11 @@ import CountryField from './CountryField'
 
 export default {
   props: ['country'],
+  
+  components: {
+    CountryField
+  },
+
   data() {
     return {
       neededField: [
@@ -32,9 +37,6 @@ export default {
         { name: 'area' }
       ]
     }
-  },
-  components: {
-    CountryField
   }
 }
 </script>
