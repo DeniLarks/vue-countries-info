@@ -1,5 +1,8 @@
 <template>
   <div id="app">
+    <div class="countries-count">
+      {{ `Found ${countries.length} countries` }}
+    </div>
     <div class="countries-list">
       <Country 
         v-for="country in countries"
@@ -64,8 +67,30 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+}
+
+.countries-count {
+  text-align: right;
+  margin: 20px 0;
+}
+
+.countries-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  .country {
+    width: 49%;
+    box-sizing: border-box;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .countries-list {
+    justify-content: center;
+
+    .country {
+      width: 100%;
+    }
+  }
 }
 </style>
