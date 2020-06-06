@@ -1,13 +1,15 @@
 <template>
   <div id="app">
     
-    <Header 
-      v-bind:countriesCount="countries.length"
+    <Header
+      v-bind:countries="filteredCountries"
+      v-bind:filters="filters"
+      @changeFilters="changeFilters"
     />
 
     <div class="countries-list">
       <Country 
-        v-for="country in countries"
+        v-for="country in filteredCountries"
         v-bind:key="country.name"
         v-bind:country="country"
       />
@@ -29,39 +31,36 @@ export default {
 
   data() {
     return {
-      countries: [
-        {
-          name: "Albania",
-          capital: "Tirana",
-          region: "Europe",
-          population: 2886026,
-          area: 28748,
-          timezones: [
-            "UTC+01:00"
-          ],
-          flag: "https://restcountries.eu/data/alb.svg",
-          cioc: "ALB"
-        },
-        {
-          name: "Albania2",
-          capital: "Tirana",
-          region: "Europe",
-          population: 2886026,
-          area: 28748,
-          timezones: [
-            "UTC+01:00"
-          ],
-          flag: "https://restcountries.eu/data/alb.svg",
-          cioc: "ALBA"
-        }
-      ]
+      countries: [],
+      filteredCountries: [],
+      filters: {
+        name: ''
+      }
     }
+  },
+
+  methods: {
+    changeFilters(field, value) {
+      // console.log(`field = ${field}; value = ${value}`)
+      this.filters[field] = value
+
+      this.applyFilters()
+    },
+
+    applyFilters() {
+      this.filteredCountries = this.countries
+        .filter(country => country.name.toLowerCase().includes(this.filters.name.toLowerCase()))
+    }
+
   },
 
   mounted() {
     fetch('https://restcountries.eu/rest/v2/all')
       .then(response => response.json())
-      .then(json => this.countries = json)
+      .then(json => {
+        this.countries = json
+        this.filteredCountries = json
+      })
   },
 }
 </script>

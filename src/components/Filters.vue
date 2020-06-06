@@ -1,22 +1,48 @@
 <template>
   <div class="filters">
-    <button @click="$emit('toggle-filters')" class="btn btn-close top">&times;</button>
+    <button 
+      @click="$emit('toggle-filters')" 
+      class="btn btn-close top"
+    >&times;</button>
+    
     <form @submit.prevent="onSubmit">
       <div class="inner">
         <div>
           <label>
             Name country
-            <input type="text" />
+            <input
+              v-model="filters.name"
+              type="text" 
+              @input="changerNameInput"
+            />
           </label>
         </div>
 
         <div>
-          <button @click="$emit('toggle-filters')" class="btn btn-close bottom" type="submit">OK</button>
+          
+          <button 
+            @click="$emit('toggle-filters')"
+            class="btn btn-close bottom" 
+            type="submit"
+          >OK</button>
+
         </div>
       </div>
     </form>
   </div>
 </template>
+
+<script>
+export default {
+  props: ['filters'],
+
+  methods: {
+    changerNameInput(input) {
+      this.$emit('changeFilters', 'name', input.target.value)
+    }
+  }
+}
+</script>
 
 <style lang="scss" scoped>
   .filters {

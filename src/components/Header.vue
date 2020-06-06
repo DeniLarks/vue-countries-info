@@ -2,11 +2,16 @@
   <div class="header">
     <div class="filters-btn-container">
       <button class="btn btn-filters" @click="toggleFilters">Filters</button>
-      <Filters @toggle-filters="toggleFilters" v-if="isFilters" />    
+      <Filters 
+        @toggle-filters="toggleFilters" 
+        v-if="isFilters"
+        v-bind:filters="filters"
+        @changeFilters="changeFilters"
+      />    
     </div>
     
     <div class="countries-count">
-      {{ `Found ${countriesCount} countries` }}
+      {{ `Found ${countries.length} countries` }}
     </div>
   </div>
 </template>
@@ -15,7 +20,7 @@
 import Filters from './Filters'
 
 export default {
-  props: ['countriesCount'],
+  props: ['countries', 'filters'],
  
   components: {
     Filters
@@ -28,13 +33,13 @@ export default {
   },
 
   methods: {
-    onSubmit() {
-      console.log('submit')
-    },
     toggleFilters() {
       this.isFilters = !this.isFilters 
+    },
+
+    changeFilters(field, value) {
+      this.$emit('changeFilters', field, value)
     }
-    
   }
 }
 </script>
