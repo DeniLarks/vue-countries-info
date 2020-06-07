@@ -1,14 +1,17 @@
 <template>
   <div id="app">
     
+    <Loader v-if="isLoader"/>
+
     <Header
       v-bind:countries="filteredCountries"
       v-bind:filters="filters"
       v-bind:regions="regions"
       @changeFilters="changeFilters"
+      v-if="!isLoader"
     />
 
-    <div class="countries-list">
+    <div class="countries-list" v-if="!isLoader">
       <Country 
         v-for="country in filteredCountries"
         v-bind:key="country.name"
@@ -22,16 +25,18 @@
 <script>
 import Country from './components/Country'
 import Header from './components/Header'
+import Loader from './components/Loader'
 
 export default {
   name: 'App',
 
   components: {
-    Country, Header
+    Country, Header, Loader
   },
 
   data() {
     return {
+      isLoader: true,
       countries: [],
       filteredCountries: [],
       regions: ['All'],
@@ -96,6 +101,8 @@ export default {
   },
 
   mounted() {
+    this.isLoader = true
+
     fetch('https://restcountries.eu/rest/v2/all')
       .then(response => response.json())
       .then(json => {
@@ -112,6 +119,8 @@ export default {
         })
 
         this.filters.region = this.regions[0]
+
+        this.isLoader = false
       })
   },
 }
