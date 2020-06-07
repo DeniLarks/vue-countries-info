@@ -4,6 +4,7 @@
     <Header
       v-bind:countries="filteredCountries"
       v-bind:filters="filters"
+      v-bind:regions="regions"
       @changeFilters="changeFilters"
     />
 
@@ -33,23 +34,35 @@ export default {
     return {
       countries: [],
       filteredCountries: [],
+      regions: ['All'],
       filters: {
-        name: ''
+        name: '',
+        region: ''
       }
     }
   },
 
   methods: {
     changeFilters(field, value) {
-      // console.log(`field = ${field}; value = ${value}`)
+      console.log(`field = ${field}; value = ${value}`)
       this.filters[field] = value
 
       this.applyFilters()
     },
 
     applyFilters() {
-      this.filteredCountries = this.countries
+      this.filteredCountries = [...this.countries]
+
+      this.filteredCountries = this.filteredCountries
         .filter(country => country.name.toLowerCase().includes(this.filters.name.toLowerCase()))
+      
+      if(this.filters.region === 'All') {
+        this.filteredCountries = this.filteredCountries
+      } else {
+        this.filteredCountries = this.filteredCountries
+          .filter(country => country.region === this.filters.region)
+      }
+      
     }
 
   },
@@ -60,6 +73,17 @@ export default {
       .then(json => {
         this.countries = json
         this.filteredCountries = json
+
+        const tempRegions = this.countries.map(country => {
+          if(!country.region) return 'undefined'
+          return country.region.trim()
+        })
+
+        tempRegions.forEach(region => {
+          if(!this.regions.includes(region)) this.regions.push(region) 
+        })
+
+        this.filters.region = this.regions[0]
       })
   },
 }

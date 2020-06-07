@@ -2,10 +2,11 @@
   <div class="header">
     <div class="filters-btn-container">
       <button class="btn btn-filters" @click="toggleFilters">Filters</button>
-      <Filters 
-        @toggle-filters="toggleFilters" 
+      <Filters
+        v-bind:regions="regions"
         v-if="isFilters"
         v-bind:filters="filters"
+        @toggle-filters="toggleFilters" 
         @changeFilters="changeFilters"
       />    
     </div>
@@ -20,7 +21,7 @@
 import Filters from './Filters'
 
 export default {
-  props: ['countries', 'filters'],
+  props: ['countries', 'filters', 'regions'],
  
   components: {
     Filters

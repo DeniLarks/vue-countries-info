@@ -13,8 +13,21 @@
             <input
               v-model="filters.name"
               type="text" 
-              @input="changerNameInput"
+              @input="changerName"
             />
+          </label>
+          <label>
+            Region
+            <!-- v-model="filter" -->
+            <select v-model="filters.region" @change="changerRegion">
+              <option
+                v-for="(region, index) in regions"
+                v-bind:key="index"
+                v-bind:value="region"
+              >
+                {{region}}
+              </option>
+            </select>
           </label>
         </div>
 
@@ -34,11 +47,14 @@
 
 <script>
 export default {
-  props: ['filters'],
+  props: ['filters', 'regions'],
 
   methods: {
-    changerNameInput(input) {
+    changerName(input) {
       this.$emit('changeFilters', 'name', input.target.value)
+    },
+    changerRegion(input) {
+      this.$emit('changeFilters', 'region', input.target.value)
     }
   }
 }
