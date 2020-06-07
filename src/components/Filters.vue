@@ -54,6 +54,31 @@
             </label>
             </div>
           </div>
+
+          <div>
+            <strong>AREA</strong>
+            <div>
+              <label>
+              Less than
+              <input 
+                type="number" 
+                v-model="filters.areaLessThan"
+                @input="changerAreaLessThan"
+              >
+            </label>
+            </div>
+            <div>
+              <label>
+              More than
+              <input 
+                type="number" 
+                v-model="filters.areaMoreThan"
+                @input="changerAreaMoreThan"
+              >
+            </label>
+            </div>
+          </div>
+
         </div>
 
         <div>
@@ -89,6 +114,15 @@ export default {
     changerPopulationMoreThan(input) {
       if(input.target.value)
         this.$emit('changeFilters', 'populationMoreThan', +input.target.value)
+    },
+
+    changerAreaLessThan(input) {
+      if(input.target.value)
+        this.$emit('changeFilters', 'areaLessThan', +input.target.value)
+    },
+    changerAreaMoreThan(input) {
+      if(input.target.value)
+        this.$emit('changeFilters', 'areaMoreThan', +input.target.value)
     }
 
   }

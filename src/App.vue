@@ -42,6 +42,8 @@ export default {
         populationLessThan: 0,
         populationMoreThan: 0,
 
+        areaLessThan: 0,
+        areaMoreThan: 0
 
       }
     }
@@ -80,6 +82,15 @@ export default {
         this.filteredCountries = this.filteredCountries
           .filter(country => country.population >= this.filters.populationMoreThan)
 
+      // filter by area less than
+      if(this.filters.areaLessThan > 0)
+        this.filteredCountries = this.filteredCountries
+          .filter(country => country.population <= this.filters.areaLessThan)
+      
+      // filter by area more than
+      if(this.filters.areaMoreThan > 0)
+        this.filteredCountries = this.filteredCountries
+          .filter(country => country.population >= this.filters.areaMoreThan)
     }
 
   },
