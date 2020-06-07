@@ -37,14 +37,19 @@ export default {
       regions: ['All'],
       filters: {
         name: '',
-        region: ''
+        region: '',
+
+        populationLessThan: 0,
+        populationMoreThan: 0,
+
+
       }
     }
   },
 
   methods: {
     changeFilters(field, value) {
-      console.log(`field = ${field}; value = ${value}`)
+      // console.log(`field = ${field}; value = ${value}`)
       this.filters[field] = value
 
       this.applyFilters()
@@ -53,16 +58,28 @@ export default {
     applyFilters() {
       this.filteredCountries = [...this.countries]
 
+      // filter by name
       this.filteredCountries = this.filteredCountries
         .filter(country => country.name.toLowerCase().includes(this.filters.name.toLowerCase()))
       
+      // filter by region
       if(this.filters.region === 'All') {
         this.filteredCountries = this.filteredCountries
       } else {
         this.filteredCountries = this.filteredCountries
           .filter(country => country.region === this.filters.region)
       }
+
+      // filter by population less than
+      if(this.filters.populationLessThan > 0)
+        this.filteredCountries = this.filteredCountries
+          .filter(country => country.population <= this.filters.populationLessThan)
       
+      // filter by population more than
+      if(this.filters.populationMoreThan > 0)
+        this.filteredCountries = this.filteredCountries
+          .filter(country => country.population >= this.filters.populationMoreThan)
+
     }
 
   },

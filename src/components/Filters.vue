@@ -16,6 +16,7 @@
               @input="changerName"
             />
           </label>
+          
           <label>
             Region
             <!-- v-model="filter" -->
@@ -29,6 +30,30 @@
               </option>
             </select>
           </label>
+
+          <div>
+            <strong>POPULATION</strong>
+            <div>
+              <label>
+              Less than
+              <input 
+                type="number" 
+                v-model="filters.populationLessThan"
+                @input="changerPopulationLessThan"
+              >
+            </label>
+            </div>
+            <div>
+              <label>
+              More than
+              <input 
+                type="number" 
+                v-model="filters.populationMoreThan"
+                @input="changerPopulationMoreThan"
+              >
+            </label>
+            </div>
+          </div>
         </div>
 
         <div>
@@ -55,7 +80,17 @@ export default {
     },
     changerRegion(input) {
       this.$emit('changeFilters', 'region', input.target.value)
+    },
+
+    changerPopulationLessThan(input) {
+      if(input.target.value)
+        this.$emit('changeFilters', 'populationLessThan', +input.target.value)
+    },
+    changerPopulationMoreThan(input) {
+      if(input.target.value)
+        this.$emit('changeFilters', 'populationMoreThan', +input.target.value)
     }
+
   }
 }
 </script>
