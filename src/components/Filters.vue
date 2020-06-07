@@ -142,6 +142,17 @@ export default {
 
     padding: 20px;
 
+    input, select {
+      padding: 5px;
+    }
+
+    label {
+      margin: 5px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
     .inner {
       margin: 5% 0;
       height: 90%;
@@ -170,11 +181,12 @@ export default {
     
     .form-block {
       margin-bottom: 20px;
+    }
+  }
 
-      label {
-        display: flex;
-        justify-content: space-between;
-      }
+  @media screen and (max-width: 700px) {
+    .filters { 
+      width: 90%; 
     }
   }
 </style>
