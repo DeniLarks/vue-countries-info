@@ -7,7 +7,8 @@
     
     <form @submit.prevent="onSubmit">
       <div class="inner">
-        <div>
+
+        <div class="form-block">
           <label>
             Name country
             <input
@@ -16,7 +17,9 @@
               @input="changerName"
             />
           </label>
-          
+        </div>
+
+        <div class="form-block">  
           <label>
             Region
             <!-- v-model="filter" -->
@@ -30,21 +33,22 @@
               </option>
             </select>
           </label>
+        </div>
 
+        <div class="form-block">
+          <strong>POPULATION</strong>
           <div>
-            <strong>POPULATION</strong>
-            <div>
-              <label>
-              Less than
-              <input 
-                type="number" 
-                v-model="filters.populationLessThan"
-                @input="changerPopulationLessThan"
-              >
-            </label>
-            </div>
-            <div>
-              <label>
+            <label>
+            Less than
+            <input 
+              type="number" 
+              v-model="filters.populationLessThan"
+              @input="changerPopulationLessThan"
+            >
+          </label>
+          </div>
+          <div>
+            <label>
               More than
               <input 
                 type="number" 
@@ -52,43 +56,39 @@
                 @input="changerPopulationMoreThan"
               >
             </label>
-            </div>
           </div>
+        </div>
 
+        <div class="form-block">
+          <strong>AREA</strong>
           <div>
-            <strong>AREA</strong>
-            <div>
-              <label>
-              Less than
-              <input 
-                type="number" 
-                v-model="filters.areaLessThan"
-                @input="changerAreaLessThan"
-              >
-            </label>
-            </div>
-            <div>
-              <label>
-              More than
-              <input 
-                type="number" 
-                v-model="filters.areaMoreThan"
-                @input="changerAreaMoreThan"
-              >
-            </label>
-            </div>
+            <label>
+            Less than
+            <input 
+              type="number" 
+              v-model="filters.areaLessThan"
+              @input="changerAreaLessThan"
+            >
+          </label>
           </div>
-
+          <div>
+            <label>
+            More than
+            <input 
+              type="number" 
+              v-model="filters.areaMoreThan"
+              @input="changerAreaMoreThan"
+            >
+          </label>
+          </div>
         </div>
 
         <div>
-          
           <button 
             @click="$emit('toggle-filters')"
             class="btn btn-close bottom" 
             type="submit"
           >OK</button>
-
         </div>
       </div>
     </form>
@@ -135,6 +135,7 @@ export default {
     width: 50%;
     height: 500px;
     background-color: #f1dfdf;
+    opacity: .93;
 
     border: 1px solid #928989;
     box-shadow: 4px 4px 5px #d1c6c6;
@@ -164,6 +165,15 @@ export default {
         bottom: 10px;
         right: 50%;
         transform: translateX(50%);
+      }
+    }
+    
+    .form-block {
+      margin-bottom: 20px;
+
+      label {
+        display: flex;
+        justify-content: space-between;
       }
     }
   }
