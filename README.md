@@ -9,7 +9,7 @@
 </ul>
 
 <h3>Функционал приложения</h3>
-<p>Приложение получает данные через API <a href="https://restcountries.eu/">REST Countries(информация о странах)</a></p>
+<p>Приложение получает данные через API <a href="https://restcountries.eu/">REST Countries</a></p>
 <p>Реализованна возможность фильтрации стран по:</p>
 <ul>
   <li>названию</li>
